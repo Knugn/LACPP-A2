@@ -1,18 +1,16 @@
 import java.util.Random;
 
 public class Quicksort {
-	private static int minSizeForQuick = 40;
+	private int minSizeForQuick = 4000;
 	
-	
-	public static void main(String[] args) {
-		int array[] = createArray(10000000);
-
-		sequentialQuicksort(array);
-		boolean isAsc = isAscending(array);
-		System.out.println(isAsc);
+	public Quicksort(int minSizeForQuick) {
+		this.minSizeForQuick = minSizeForQuick;
 	}
 	
-	static int[] createArray(int size){
+	
+
+	
+	public static int[] createArray(int size){
 		int values[] = new int[size];
 		Random rand = new Random();
 		for (int i = 0; i < size; i++){
@@ -21,7 +19,7 @@ public class Quicksort {
 		return values;
 	}
 	
-	static boolean isAscending(int values[]){
+	public static boolean isAscending(int values[]){
 		for (int i = 1; i < values.length; i++){
 			if (values[i-1] > values[i]){
 				System.out.println(values[i-1] + " " + i);
@@ -65,7 +63,7 @@ public class Quicksort {
      * @param start
      * @param end
      */
-    private static void sequentialQuicksort(final int[] arr, final int start, final int end) {
+    private void sequentialQuicksort(final int[] arr, final int start, final int end) {
         int left = start;
         int right = end;
         // We simply pick the first element as pivot..
@@ -129,21 +127,13 @@ public class Quicksort {
         }
     }
 
-    public static void sequentialQuicksort(final int[] arr) {
+    public void sequentialQuicksort(final int[] arr) {
     	double startTime = System.currentTimeMillis();
         sequentialQuicksort(arr, 0, arr.length);
         System.out.print("time taken for quicksort ");
         System.out.println((System.currentTimeMillis() - startTime)/1000);
     }
 
-    public static void threadedQuicksort(final int[] arr){
-    	Thread t1 = new Thread(new Runnable() {
-    	     public void run() {
-    	    	 sequentialQuicksort(arr);
-    	     }
-    	});  
-    	t1.start();
-    }
     
     public static void parallelQuicksort(final int[] arr) {
         // TODO: implement a parallel quicksort
