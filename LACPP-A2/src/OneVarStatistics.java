@@ -88,8 +88,10 @@ public class OneVarStatistics {
 	}
 	
 	public void setData(Collection<Double> data) {
-		if (data == null)
+		if (data == null) {
 			this.data = null;
+			return;
+		}
 		if (data.size() == 0)
 			throw new IllegalArgumentException("data must have at least 1 value.");
 		this.data = new double[data.size()];
@@ -166,9 +168,11 @@ public class OneVarStatistics {
 					q1 = data[0];
 					q3 = data[0];
 				}
-				q1 = (data[q-1] + data[q] * 3) / 4;
-				q *= 3;
-				q3 = (data[q] * 3 + data[q+1]) / 4;
+				else {
+					q1 = (data[q-1] + data[q] * 3) / 4;
+					q *= 3;
+					q3 = (data[q] * 3 + data[q+1]) / 4;
+				}
 				break;
 			case 3:
 				q1 = (data[q] * 3 + data[q+1]) / 4;
