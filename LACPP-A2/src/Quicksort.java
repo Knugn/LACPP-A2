@@ -20,15 +20,14 @@ public class Quicksort {
 		}
 		return values;
 	}
+	
 	static boolean isAscending(int values[]){
-		int old = values[0];
 		for (int i = 1; i < values.length; i++){
-			if (old > values[i])
+			if (values[i-1] > values[i])
 				return false;
 		}
 		return true;
 	}
-	
 	
     private static void insertionSort(final int[] arr, final int start, final int end) {
         for (int i = start + 1; i < end; ++i) {
