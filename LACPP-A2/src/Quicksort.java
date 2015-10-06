@@ -127,10 +127,7 @@ public class Quicksort {
     }
 
     public void sequentialQuicksort(final int[] arr) {
-    	double startTime = System.currentTimeMillis();
         sequentialQuicksort(arr, 0, arr.length);
-        System.out.print("time taken for quicksort ");
-        System.out.println((System.currentTimeMillis() - startTime)/1000);
     }
     
 }
