@@ -3,7 +3,7 @@ public class Quicksort {
 	private int minSizeForQuicksort;
 	
 	public Quicksort() {
-		this(4096);
+		this(40);
 	}
 	
 	public Quicksort(int minSizeForQuicksort) {
@@ -62,7 +62,7 @@ public class Quicksort {
      * @param start
      * @param end
      */
-    private void sequentialQuicksort(final int[] arr, final int start, final int end) {
+    public void sequentialQuicksort(final int[] arr, final int start, final int end) {
         int left = start;
         int right = end;
         // We simply pick the first element as pivot..
