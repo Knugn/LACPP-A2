@@ -23,14 +23,17 @@ public class Quicksort {
 	
 	static boolean isAscending(int values[]){
 		for (int i = 1; i < values.length; i++){
-			if (values[i-1] > values[i])
+			if (values[i-1] > values[i]){
+				System.out.println(values[i-1] + " " + i);
+				System.out.println(values[i]);
 				return false;
+			}
 		}
 		return true;
 	}
 	
     private static void insertionSort(final int[] arr, final int start, final int end) {
-        for (int i = start + 1; i < end; ++i) {
+        for (int i = start + 1; i <= end; ++i) {
             int j = i;
             int tmp = arr[i];
             while (j > 0 && arr[j-1] > tmp) {
@@ -96,6 +99,7 @@ public class Quicksort {
         // two parts around the pivot value. We recurse to
         // sort those parts.
         if (start < right) {
+        	
         	if  (right - start > minSizeForQuick){
         		sequentialQuicksort(arr, start, right);
         	}
@@ -104,7 +108,7 @@ public class Quicksort {
         	}
         }
         if (left < end) {
-        	if  (end -left > minSizeForQuick){
+        	if  (end - left > minSizeForQuick){
         		sequentialQuicksort(arr, left, end);
         	}
         	else{
