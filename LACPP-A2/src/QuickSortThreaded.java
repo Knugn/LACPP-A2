@@ -17,10 +17,7 @@ public class QuickSortThreaded {
 		//System.out.println(isAsc);
 	}
 
-	static boolean isDone(){
-		
-	}
-	
+
 	
 	static int[][] createArrays(int nummber, int size){
 		int arrays[][] = new int[nummber][];
@@ -148,8 +145,6 @@ public class QuickSortThreaded {
 		t1.start();
 	}
 
-	public static void parallelQuicksort(final int[] arr) {
-		// TODO: implement a parallel quicksort
-	}
+
 
 }

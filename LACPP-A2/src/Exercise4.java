@@ -2,7 +2,7 @@
 public class Exercise4 {
  
 	public static void main(String[] args) {
-		int array[] = ArrayUtils.createArray(100000000);
+		int array[] = ArrayUtils.createArray(10000000);
 		int threshold = 10000;
 		QuickSortParallel quick = new QuickSortParallel(array, threshold);
 		long t1 = System.nanoTime();
