@@ -137,14 +137,15 @@ public class Exercise2_7_a {
 		TestManager.init();
 		TestInfo ti = new TestInfo();
 		Quicksort qs = new Quicksort();
-		int nMax = (1024*1024*1);
-		for (int n=nMax/4; n <= nMax; n*=2) {
+		int nMax = (1024*1024*8);
+		for (int n=nMax/64; n <= nMax; n*=2) {
 			ti.n = n;
 			int[] arr = new int[n];
-			int numRuns = nMax / n; //Integer.numberOfTrailingZeros(nMax / n) + 1;
+			int numRuns = nMax / n * 2; //Integer.numberOfTrailingZeros(nMax / n) + 1;
 			//System.out.println(numRuns);
-			for (int swap=512; swap <= 1024; swap*=2) {
+			for (int swap=2; swap <= 1024; swap*=2) {
 				ti.swap = swap;
+				System.out.println(ti);
 				//qs.setMinSizeForQuicksort(swap);
 				for (int run=0; run < numRuns; run++) {
 					ArrayUtils.initRandomArray(arr);
@@ -154,7 +155,7 @@ public class Exercise2_7_a {
 					long t2 = System.nanoTime();
 					double ms = (t2-t1) / 1000000;
 					TestManager.addResult(ti, ms);
-					
+					System.out.println(ms + "ms");
 				}
 			}
 		}
