@@ -1,22 +1,21 @@
-import java.util.Random;
 
 public class Quicksort {
-	private int minSizeForQuick = 4000;
+	private int minSizeForQuicksort;
 	
-	public Quicksort(int minSizeForQuick) {
-		this.minSizeForQuick = minSizeForQuick;
+	public Quicksort() {
+		this(4096);
 	}
 	
+	public Quicksort(int minSizeForQuicksort) {
+		setMinSizeForQuicksort(minSizeForQuicksort);
+	}
 	
-
+	public int getMinSizeForQuicksort() {
+		return minSizeForQuicksort;
+	}
 	
-	public static int[] createArray(int size){
-		int values[] = new int[size];
-		Random rand = new Random();
-		for (int i = 0; i < size; i++){
-			values[i] = rand.nextInt();
-		}
-		return values;
+	public void setMinSizeForQuicksort(int size) {
+		minSizeForQuicksort = size;
 	}
 	
 	public static boolean isAscending(int values[]){
@@ -110,7 +109,7 @@ public class Quicksort {
         // sort those parts.
         if (right - start > 1) {
         	
-        	if  (right - start > minSizeForQuick){
+        	if  (right - start > minSizeForQuicksort){
         		sequentialQuicksort(arr, start, right);
         	}
         	else{
@@ -118,7 +117,7 @@ public class Quicksort {
         	}
         }
         if (end - left > 1) {
-        	if  (end - left > minSizeForQuick){
+        	if  (end - left > minSizeForQuicksort){
         		sequentialQuicksort(arr, left, end);
         	}
         	else{
@@ -133,10 +132,5 @@ public class Quicksort {
         System.out.print("time taken for quicksort ");
         System.out.println((System.currentTimeMillis() - startTime)/1000);
     }
-
     
-    public static void parallelQuicksort(final int[] arr) {
-        // TODO: implement a parallel quicksort
-    }
-
 }
