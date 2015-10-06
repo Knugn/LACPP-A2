@@ -26,7 +26,7 @@ public class MatlabUtil {
 				first = false;
 			else
 				out.println(", ");
-			printMatlabArray(l, elementsPerLine, System.out);
+			printMatlabArray(l, elementsPerLine, out);
 		}
 		out.println();
 		out.println("]");
