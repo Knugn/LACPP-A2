@@ -20,7 +20,7 @@ public class Exercise1 {
 		int mini = 30;
 		int maxi = 30;
 		int numi = maxi - mini + 1;
-		int nRuns = 1000;
+		int nRuns = 10;
 		ArrayList<ArrayList<Double>> times = new ArrayList<>(nRuns);
 		for (int run = 0; run < nRuns; run++) {
 			ArrayList<Double> curRunTimes = new ArrayList<>(numi);
