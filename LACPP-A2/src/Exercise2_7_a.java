@@ -2,7 +2,6 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -106,6 +105,7 @@ public class Exercise2_7_a {
 		
 		public static void printReduceOnSwapResults(PrintStream out) {
 			SortedSet<Integer> swapVals = getSwapValues();
+			List<List<Double>> allAvgMsResults = new ArrayList<>();
 			for (Integer swap : swapVals) {
 				out.println(String.format("<Swap to insertion sort at: %1$d>", swap));
 				SortedMap<Integer, List<Double>> results = new TreeMap<>();
@@ -129,7 +129,10 @@ public class Exercise2_7_a {
 				MatlabUtil.printMatlabArray(avgMsResults, Integer.MAX_VALUE, out);
 				out.println();
 				out.println();
+				allAvgMsResults.add(avgMsResults);
 			}
+			out.println("Compact mean time results sorted primarily on swap and secondarily on n.");
+			MatlabUtil.printMatlabArray2D(allAvgMsResults, Integer.MAX_VALUE, out);
 		}
 	}
 	
@@ -146,7 +149,7 @@ public class Exercise2_7_a {
 			for (int swap=2; swap <= 1024; swap*=2) {
 				ti.swap = swap;
 				System.out.println(ti);
-				//qs.setMinSizeForQuicksort(swap);
+				qs.setMinSizeForQuicksort(swap);
 				for (int run=0; run < numRuns; run++) {
 					ArrayUtils.initRandomArray(arr);
 					

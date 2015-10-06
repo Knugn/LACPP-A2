@@ -25,7 +25,7 @@ public class MatlabUtil {
 			if (first)
 				first = false;
 			else
-				out.println(", ");
+				out.println("; ");
 			printMatlabArray(l, elementsPerLine, out);
 		}
 		out.println();
