@@ -32,8 +32,14 @@ public class Quicksort {
 		return true;
 	}
 	
+	/**
+     * Sorts interval [start, end) of arr sequentially
+     * @param arr
+     * @param start
+     * @param end
+     */
     private static void insertionSort(final int[] arr, final int start, final int end) {
-        for (int i = start + 1; i <= end; ++i) {
+        for (int i = start + 1; i < end; ++i) {
             int j = i;
             int tmp = arr[i];
             while (j > 0 && arr[j-1] > tmp) {
@@ -53,9 +59,15 @@ public class Quicksort {
     //
     // NOTE: numbers equal to pivot may be included in either left or right.
     //
+    /**
+     * Sorts interval [start, end) of arr sequentially
+     * @param arr
+     * @param start
+     * @param end
+     */
     private static void sequentialQuicksort(final int[] arr, final int start, final int end) {
         int left = start;
-        int right = end + 1;
+        int right = end;
         // We simply pick the first element as pivot..
         final int pivot = arr[start];
         int tmp;
@@ -70,7 +82,7 @@ public class Quicksort {
             // the pivot we just continue.
             do {
                 left++;
-            } while (left <= end && arr[left] < pivot);
+            } while (left < end && arr[left] < pivot);
 
             // As long as the elements to the right are
             // greater than the pivot we just continue.
@@ -98,7 +110,7 @@ public class Quicksort {
         // We have now "split" the range arr[start, end] into
         // two parts around the pivot value. We recurse to
         // sort those parts.
-        if (start < right) {
+        if (right - start > 1) {
         	
         	if  (right - start > minSizeForQuick){
         		sequentialQuicksort(arr, start, right);
@@ -107,7 +119,7 @@ public class Quicksort {
         		insertionSort(arr, start, right);
         	}
         }
-        if (left < end) {
+        if (end - left > 1) {
         	if  (end - left > minSizeForQuick){
         		sequentialQuicksort(arr, left, end);
         	}
@@ -119,7 +131,7 @@ public class Quicksort {
 
     public static void sequentialQuicksort(final int[] arr) {
     	double startTime = System.currentTimeMillis();
-        sequentialQuicksort(arr, 0, arr.length-1);
+        sequentialQuicksort(arr, 0, arr.length);
         System.out.print("time taken for quicksort ");
         System.out.println((System.currentTimeMillis() - startTime)/1000);
     }
