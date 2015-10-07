@@ -6,6 +6,18 @@ import java.util.List;
 
 public class OneVarStatistics {
 	
+	public enum Property {
+		Sum,
+		Mean,
+		Median,
+		Min,
+		Max,
+		Q1,
+		Q3,
+		Variance,
+		Deviation,
+	}
+	
 	double[] data;
 	double sum;
 	double mean;
@@ -28,6 +40,31 @@ public class OneVarStatistics {
 	
 	public double getValue(int idx) {
 		return data[idx];
+	}
+	
+	public double getProperty(Property p) {
+		switch(p) {
+			case Sum:
+				return getSum();
+			case Mean:
+				return getMean();
+			case Median:
+				return getMedian();
+			case Min:
+				return getMin();
+			case Max:
+				return getMax();
+			case Q1:
+				return getQ1();
+			case Q3:
+				return getQ3();
+			case Variance:
+				return getVariance();
+			case Deviation:
+				return getDeviation();
+			default:
+				throw new IllegalArgumentException("Uknown property.");
+		}
 	}
 	
 	public double getSum() {

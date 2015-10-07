@@ -1,22 +1,10 @@
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
 import java.util.concurrent.ForkJoinPool;
-import java.util.SortedMap;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 /**
- * Find optimal value for changing to insertion sort,
+ * Find optimal value for changing to sequential sort.
  *
  */
 public class Exercise4_3 {
-	
-
-
 	
 	public static void main(String[] args) {
 		TestManager.init();
@@ -25,8 +13,7 @@ public class Exercise4_3 {
 		for (int n=nMax/64; n <= nMax; n*=2) {
 			ti.n = n;
 			int[] arr = new int[n];
-			int numRuns = nMax / n * 10; //Integer.numberOfTrailingZeros(nMax / n) + 1;
-			//System.out.println(numRuns);
+			int numRuns = nMax / n * 10;
 			for (int threshold=2; threshold <= 262144; threshold*=2) {
 				ti.swap = threshold;
 				System.out.println(ti);
@@ -44,7 +31,12 @@ public class Exercise4_3 {
 				}
 			}
 		}
-		TestManager.printResults(System.out);
+		//TestManager.printResults(System.out);
+		OneVarStatistics.Property[] props = OneVarStatistics.Property.values();
+		for (OneVarStatistics.Property p : props) {
+			TestManager.printReduceOnSwapResults(System.out, p, true);
+		}
+		
 	}
 	
 }

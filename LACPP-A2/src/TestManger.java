@@ -36,7 +36,6 @@ import java.util.Map.Entry;
 		
 		public static void printResults(PrintStream out) {
 			printDetailedPerTestConfigurationResult(out);
-			printReduceOnSwapResults(out);
 		}
 		
 		public static void printDetailedPerTestConfigurationResult(PrintStream out) {
@@ -65,35 +64,46 @@ import java.util.Map.Entry;
 			return nVals;
 		}
 		
-		public static void printReduceOnSwapResults(PrintStream out) {
+		public static void printReduceOnSwapResults(PrintStream out, Iterable<OneVarStatistics.Property> props, boolean compact) {
+			for (OneVarStatistics.Property p : props) {
+				printReduceOnSwapResults(out, p, compact);
+			}
+		}
+		
+		public static void printReduceOnSwapResults(PrintStream out, OneVarStatistics.Property p, boolean compact) {
 			SortedSet<Integer> swapVals = getSwapValues();
-			List<List<Double>> allAvgMsResults = new ArrayList<>();
+			List<List<Double>> allPropLists = new ArrayList<>();
 			for (Integer swap : swapVals) {
-				out.println(String.format("<Swap to insertion sort at: %1$d>", swap));
-				SortedMap<Integer, List<Double>> results = new TreeMap<>();
+				
+				SortedMap<Integer, List<Double>> dataMap = new TreeMap<>();
 				for (Entry<TestInfo, List<Double>> e : map.entrySet()) {
 					TestInfo key = e.getKey();
 					if (key.swap != swap)
 						continue;
-					results.put(key.n, e.getValue());
+					dataMap.put(key.n, e.getValue());
 				}
-				out.print("N = ");
-				MatlabUtil.printMatlabArray(results.keySet(), Integer.MAX_VALUE, out);
-				out.println();
 				
-				List<Double> avgMsResults = new ArrayList<>(results.size());
+				List<Double> propList = new ArrayList<>(dataMap.size());
 				OneVarStatistics stats = new OneVarStatistics();
-				for (List<Double> l : results.values()) {
+				for (List<Double> l : dataMap.values()) {
 					stats.setData(l);
-					avgMsResults.add(stats.getMean());
+					propList.add(stats.getProperty(p));
 				}
-				out.print("MeanTimes = ");
-				MatlabUtil.printMatlabArray(avgMsResults, Integer.MAX_VALUE, out);
-				out.println();
-				out.println();
-				allAvgMsResults.add(avgMsResults);
+				if (!compact) {
+					out.println(String.format("<Cut-off: %1$d>", swap));
+					out.print("N = ");
+					MatlabUtil.printMatlabArray(dataMap.keySet(), Integer.MAX_VALUE, out);
+					out.println();
+					out.print(p + " = ");
+					MatlabUtil.printMatlabArray(propList, Integer.MAX_VALUE, out);
+					out.println();
+					out.println();
+				}
+				allPropLists.add(propList);
 			}
-			out.println("Compact mean time results sorted primarily on swap and secondarily on n.");
-			MatlabUtil.printMatlabArray2D(allAvgMsResults, Integer.MAX_VALUE, out);
+			if (compact) {
+				out.println("Compact " + p.toString().toLowerCase() + " time results sorted primarily on cut-off and secondarily on n.");
+				MatlabUtil.printMatlabArray2D(allPropLists, Integer.MAX_VALUE, out);
+			}
 		}
 	}
