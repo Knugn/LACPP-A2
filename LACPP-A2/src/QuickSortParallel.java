@@ -9,7 +9,7 @@ public class QuickSortParallel extends RecursiveAction {
 	int start; 
 	int end;
 	int[] arr;
-	int threshold = 10000;
+	int threshold;
 	/**
 	 * 
 	 */

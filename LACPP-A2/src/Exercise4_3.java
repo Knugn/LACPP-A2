@@ -21,28 +21,26 @@ public class Exercise4_3 {
 	public static void main(String[] args) {
 		TestManager.init();
 		TestInfo ti = new TestInfo();
-		Quicksort qs = new Quicksort();
 		int nMax = (1024*1024*8);
 		for (int n=nMax/64; n <= nMax; n*=2) {
 			ti.n = n;
 			int[] arr = new int[n];
-			int numRuns = nMax / n * 2; //Integer.numberOfTrailingZeros(nMax / n) + 1;
+			int numRuns = nMax / n * 10; //Integer.numberOfTrailingZeros(nMax / n) + 1;
 			//System.out.println(numRuns);
-			for (int threshold=2; threshold <= 16384; threshold*=2) {
+			for (int threshold=2; threshold <= 262144; threshold*=2) {
 				ti.swap = threshold;
 				System.out.println(ti);
-				qs.setMinSizeForQuicksort(threshold);
 				for (int run=0; run < numRuns; run++) {
 					ArrayUtils.initRandomArray(arr);
 					
 					QuickSortParallel quick = new QuickSortParallel(arr, threshold);
-					long t1 = System.nanoTime();
 					ForkJoinPool pool = new ForkJoinPool();
+					long t1 = System.nanoTime();
 					pool.invoke(quick);
 					long t2 = System.nanoTime();
 					double ms = (t2-t1) / 1000000;
 					TestManager.addResult(ti, ms);
-					System.out.println(ms + "ms");
+					//System.out.println(ms + "ms");
 				}
 			}
 		}
