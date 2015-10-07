@@ -5,8 +5,8 @@ public class Exercise2 {
 		Quicksort quick = new Quicksort(40);
 		int array[] = ArrayUtils.createArray(10000000);
 		quick.sequentialQuicksort(array);
-		boolean isAsc = Quicksort.isAscending(array);
-		System.out.println(isAsc);
+		//boolean isAsc = Quicksort.isAscending(array);
+		//System.out.println(isAsc);
 	}
 	
 }
