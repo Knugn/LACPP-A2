@@ -130,4 +130,15 @@ public class Quicksort {
         sequentialQuicksort(arr, 0, arr.length);
     }
     
+
+	public Thread threadedQuicksort(final int[] arr){
+		Thread t1 = new Thread(new Runnable() {
+			public void run() {
+				sequentialQuicksort(arr);
+			}
+		});  
+		t1.start();
+		return t1;
+	}
+    
 }

@@ -17,4 +17,12 @@ public class ArrayUtils {
 		}
 		return values;
 	}
+	
+	static int[][] createArrays(int nummber, int size){
+		int arrays[][] = new int[nummber][];
+		for (int i = 0; i < nummber; i++){
+			arrays[i] = createArray(size);
+		}
+		return arrays;
+	}
 }
