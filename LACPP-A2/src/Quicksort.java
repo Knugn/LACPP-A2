@@ -3,7 +3,7 @@ public class Quicksort {
 	private int minSizeForQuicksort;
 	
 	public Quicksort() {
-		this(40);
+		this(64);
 	}
 	
 	public Quicksort(int minSizeForQuicksort) {
