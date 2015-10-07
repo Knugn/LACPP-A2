@@ -1,5 +1,6 @@
-import java.util.LinkedList;
-
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Exercise3 {
 
@@ -7,9 +8,9 @@ public class Exercise3 {
 		Quicksort quicksort = new Quicksort();
 		int Ns[] = {1,2,4,8,16,32,64,128};
 		int size = 500000;
-		LinkedList<LinkedList<Double>> allTimeTaken = new LinkedList<LinkedList<Double>>();
+		List<List<Double>> allTimeTaken = new ArrayList<>();
 		for (int sizeIndex = 0; sizeIndex < Ns.length; sizeIndex++){
-			 LinkedList<Double> timeTaken = new LinkedList<Double>();
+			List<Double> timeTaken = new ArrayList<Double>();
 			for (int n = 0; n < 5; n++){
 				Thread [] threds = new Thread[Ns[sizeIndex]];
 				int arrays[][] = ArrayUtils.createArrays(Ns[sizeIndex],size);
@@ -28,11 +29,25 @@ public class Exercise3 {
 				long endTime = System.nanoTime();
 				double totalTimeTaken = (endTime - time)/1000000d;
 				timeTaken.add(totalTimeTaken);
-				System.out.println("Nummber of threads: " + Ns[sizeIndex]);
-				System.out.println("time taken is: " + totalTimeTaken);
+				System.out.println("Number of threads: " + Ns[sizeIndex]);
+				System.out.println("Time taken: " + totalTimeTaken + "ms");
 			}
 			allTimeTaken.add(timeTaken);
 		}
-
+		
+		String[] keyStatNamesArr = {"Mean", "Max", "Q3", "Median", "Q1", "Min"};
+		List<String> keyStatNamesList = new ArrayList<>();
+		for (String s : keyStatNamesArr) {
+			keyStatNamesList.add(s);
+		}
+		List<OneVarStatistics> allTimeTakenStats = OneVarStatUtils.getStatList(allTimeTaken);
+		List<List<Double>> keyStatLists = OneVarStatUtils.getKeyLists(allTimeTakenStats, keyStatNamesList);
+		
+		PrintStream out = System.out;
+		out.println();
+		out.print("Key statisical value list in order: ");
+		MatlabUtil.printMatlabArray(keyStatNamesList, Integer.MAX_VALUE, out);
+		out.println();
+		MatlabUtil.printMatlabArray2D(keyStatLists, Integer.MAX_VALUE, out);
 	}
 }
