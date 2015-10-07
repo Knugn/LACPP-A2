@@ -87,7 +87,7 @@ public class OneVarStatUtils {
 				case "min":
 					l = getMinList(stats);
 					break;
-				case "max:":
+				case "max":
 					l = getMaxList(stats);
 					break;
 				case "q1":
