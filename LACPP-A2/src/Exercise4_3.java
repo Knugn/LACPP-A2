@@ -25,7 +25,7 @@ public class Exercise4_3 {
 					long t1 = System.nanoTime();
 					pool.invoke(quick);
 					long t2 = System.nanoTime();
-					double ms = (t2-t1) / 1000000;
+					double ms = (t2-t1) / 1000000d;
 					TestManager.addResult(ti, ms);
 					//System.out.println(ms + "ms");
 				}
