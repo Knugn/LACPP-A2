@@ -4,8 +4,7 @@ import java.util.concurrent.ForkJoinPool;
 public class Exercise4 {
 
 	public static void main(String[] args) {
-
-
+			
 		int maxThreshold = 16384;
 		int startSize = 65536;
 		int maxSize = 67108864;
