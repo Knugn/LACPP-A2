@@ -19,18 +19,14 @@ public class Exercise5_3 {
 			allITimes.add(new ArrayList<Double>());
 		}
 
-		int n = 1024*1024;	
-		//ti.n = n;
+		int n = 1024*1024;
 		int[][] arr = new int[maxCores][];
 		for (int i = 0; i < maxCores; i++){
-			arr[i] = new int[n*16];
+			arr[i] = new int[n*(i+1)];
 		}
 		int numRuns = 10;
 		int threshold=64;
-		//ti.swap = threshold;
-		//System.out.println(ti); 
-
-
+		
 		for (int run=0; run < numRuns; run++) {
 			for (int core = 0; core < maxCores; core++){
 				
@@ -43,17 +39,8 @@ public class Exercise5_3 {
 				long t2 = System.nanoTime();
 				double ms = (t2-t1) / 1000000d;
 				allITimes.get(core).add(ms);
-				//TestManager.addResult(ti, ms);
-				//System.out.println(ms + "ms");
-
 			}
-
 		}
-		//TestManager.printResults(System.out);
-	/*	OneVarStatistics.Property[] props = OneVarStatistics.Property.values();
-		for (OneVarStatistics.Property p : props) {
-			TestManager.printReduceOnSwapResults(System.out, p, true);
-		}*/
 		
 		List<OneVarStatistics> statList = OneVarStatUtils.getStatList(allITimes);
 		String[] keyStatNamesArr = {"Mean", "Max", "Q3", "Median", "Q1", "Min"};
