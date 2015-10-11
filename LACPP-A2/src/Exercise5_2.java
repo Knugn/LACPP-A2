@@ -10,14 +10,12 @@ import java.util.concurrent.ForkJoinPool;
 public class Exercise5_2 {
 
 	public static void main(String[] args) {
-		TestManager.init();
-		//TestInfo ti = new TestInfo();
 		int nrCores = 16;
 		ArrayList<ArrayList<Double>> allITimes = new ArrayList<>(16);
 
 		ForkJoinPool pool[] = new ForkJoinPool[nrCores];
 		for (int i = 0; i < nrCores; i++){
-			pool[i] = new ForkJoinPool(nrCores+1);
+			pool[i] = new ForkJoinPool(i+1);
 			allITimes.add(new ArrayList<Double>());
 		}
 		int nMax = (1024*1024*8);
