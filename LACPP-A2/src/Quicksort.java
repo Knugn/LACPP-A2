@@ -1,3 +1,5 @@
+import java.util.concurrent.ForkJoinPool;
+
 
 public class Quicksort {
 	private int minSizeForQuicksort;
@@ -135,6 +137,20 @@ public class Quicksort {
 		Thread t1 = new Thread(new Runnable() {
 			public void run() {
 				sequentialQuicksort(arr);
+			}
+		});  
+		t1.start();
+		return t1;
+	}
+	
+	public Thread threadedConcurentQuicksort(final int[] arr){
+
+		Thread t1 = new Thread(new Runnable() {
+			QuickSortParallel quickSort = new QuickSortParallel(arr,64);
+			public void run() {
+				ForkJoinPool pool = new ForkJoinPool();
+				pool.invoke(quickSort);
+				pool.shutdown();
 			}
 		});  
 		t1.start();
