@@ -14,7 +14,7 @@ public class Exercise4_3 {
 		for (int n=nMax/64; n <= nMax; n*=2) {
 			ti.n = n;
 			int[] arr = new int[n];
-			int numRuns = nMax / n * 2;
+			int numRuns = nMax / n * 10;
 			for (int threshold=2; threshold <= 262144; threshold*=2) {
 				ti.swap = threshold;
 				System.out.println(ti);
