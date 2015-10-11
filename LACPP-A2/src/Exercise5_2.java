@@ -3,34 +3,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 
-/**
- * Find optimal value for changing to sequential sort.
- *
- */
 public class Exercise5_2 {
 
 	public static void main(String[] args) {
-		int nrCores = 16;
+		int maxParallelism = 16;
 		ArrayList<ArrayList<Double>> allITimes = new ArrayList<>(16);
 
-		ForkJoinPool pool[] = new ForkJoinPool[nrCores];
-		for (int i = 0; i < nrCores; i++){
+		ForkJoinPool pool[] = new ForkJoinPool[maxParallelism];
+		for (int i = 0; i < maxParallelism; i++){
 			pool[i] = new ForkJoinPool(i+1);
 			allITimes.add(new ArrayList<Double>());
 		}
-		int nMax = (1024*1024*8);
 
-		int n = 1024*1024*8;	
-		//ti.n = n;
+		int n = 1024*1024*8;
 		int[] arr = new int[n];
 		int numRuns = 10;
 		int threshold=64;
-		//ti.swap = threshold;
-		//System.out.println(ti); 
-
-
+		
 		for (int run=0; run < numRuns; run++) {
-			for (int core = 0; core < nrCores; core++){
+			for (int core = 0; core < maxParallelism; core++){
 				
 				ArrayUtils.initRandomArray(arr);
 
@@ -41,17 +32,9 @@ public class Exercise5_2 {
 				long t2 = System.nanoTime();
 				double ms = (t2-t1) / 1000000d;
 				allITimes.get(core).add(ms);
-				//TestManager.addResult(ti, ms);
-				//System.out.println(ms + "ms");
 
 			}
-
 		}
-		//TestManager.printResults(System.out);
-	/*	OneVarStatistics.Property[] props = OneVarStatistics.Property.values();
-		for (OneVarStatistics.Property p : props) {
-			TestManager.printReduceOnSwapResults(System.out, p, true);
-		}*/
 		
 		List<OneVarStatistics> statList = OneVarStatUtils.getStatList(allITimes);
 		String[] keyStatNamesArr = {"Mean", "Max", "Q3", "Median", "Q1", "Min"};
