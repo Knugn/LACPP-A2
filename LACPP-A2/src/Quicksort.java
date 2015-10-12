@@ -3,7 +3,7 @@ import java.util.concurrent.ForkJoinPool;
 
 public class Quicksort {
 	private int minSizeForQuicksort;
-	
+	static ForkJoinPool pool = new ForkJoinPool();
 	public Quicksort() {
 		this(64);
 	}
@@ -148,9 +148,7 @@ public class Quicksort {
 		Thread t1 = new Thread(new Runnable() {
 			QuickSortParallel quickSort = new QuickSortParallel(arr,64);
 			public void run() {
-				ForkJoinPool pool = new ForkJoinPool();
 				pool.invoke(quickSort);
-				pool.shutdown();
 			}
 		});  
 		t1.start();
